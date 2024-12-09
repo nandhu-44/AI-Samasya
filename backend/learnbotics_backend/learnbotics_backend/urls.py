@@ -24,9 +24,11 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
+from django.urls import path, include
 from django.urls import path, include  # Import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('rag_app.urls')),
     path('', include('braille_translate.urls')),  # Include the app's URLs
 ]
