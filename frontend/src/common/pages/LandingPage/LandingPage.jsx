@@ -10,7 +10,7 @@ const LandingPage = () => {
 
     useEffect(() => {
         try {
-            const onboardingData = localStorage.getItem("onboardigData");
+            const onboardingData = localStorage.getItem("onboardingData");
             setIsOnboarded(onboardingData);
         } catch (error) {
             console.error("Error accessing localStorage:", error);
@@ -24,14 +24,6 @@ const LandingPage = () => {
                 ? (
                     <div className="w-full h-full">
                         <HomeComponent />
-                        <div className="m-8">
-                            <Link
-                                href="/learn-signs"
-                                className="text-purple-600 hover:text-purple-800"
-                            >
-                                Learn Hand Signs →
-                            </Link>
-                        </div>
                     </div>
                 )
                 : (
