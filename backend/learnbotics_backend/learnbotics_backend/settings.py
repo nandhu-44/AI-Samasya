@@ -11,9 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyD5jvGlcPH8II0FNrB7mTQWxfxVw-H9aV4")
+SERVICE_ACCOUNT_FILE = "/Users/nabeelnazeer/Desktop/ai-samasya/AI-Samasya/credentials/service_account_key.json"
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rag_app',
 ]
 
 MIDDLEWARE = [
