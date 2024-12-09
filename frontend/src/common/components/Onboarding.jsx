@@ -85,7 +85,7 @@ const Onboarding = () => {
     };
 
     const handleComplete = () => {
-        localStorage.setItem("onboardigData", JSON.stringify(formData));
+        localStorage.setItem("onboardingData", JSON.stringify(formData));
         window?.location.reload();
     };
 
