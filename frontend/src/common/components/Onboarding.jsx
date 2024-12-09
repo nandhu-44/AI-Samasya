@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useVoiceAssistance } from "@/hooks/useVoiceAssistance";
 import {
     Card,
     CardContent,
@@ -27,6 +28,7 @@ import {
 
 const Onboarding = () => {
     const router = useRouter();
+    const { speak, speaking } = useVoiceAssistance();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         specialNeed: "",
@@ -87,9 +89,18 @@ const Onboarding = () => {
         window?.location.reload();
     };
 
+    const handleHover = (text) => {
+        if (!speaking) {
+            speak(text);
+        }
+    };
+
     return (
         <Card className="w-full max-w-2xl border-none shadow-xl bg-white/70 backdrop-blur-sm mx-auto my-8">
-            <CardHeader className="pb-8 px-8 pt-8">
+            <CardHeader 
+                className="pb-8 px-8 pt-8"
+                onMouseEnter={() => handleHover(step === 1 ? "Special Needs Section" : step === 2 ? "Available Services Section" : "Voice Assistance Section")}
+            >
                 <CardTitle className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                     {step === 1 && "Special Needs"}
                     {step === 2 && "Available Services"}
@@ -119,6 +130,7 @@ const Onboarding = () => {
                                     }`}
                                     onClick={() =>
                                         handleSpecialNeedSelect(need)}
+                                    onMouseEnter={() => handleHover(need)}
                                 >
                                     <div className="flex items-center gap-3">
                                         <Icon className="w-5 h-5" />
@@ -155,6 +167,7 @@ const Onboarding = () => {
                                                 ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg transform scale-102"
                                                 : "border border-gray-200 hover:border-purple-400 hover:bg-purple-50"
                                         }`}
+                                        onMouseEnter={() => handleHover(service)}
                                     >
                                         <div className="flex items-center gap-3">
                                             <Icon
@@ -176,6 +189,7 @@ const Onboarding = () => {
                             className="w-full mt-8 py-6 text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90 transition-all"
                             onClick={() => setStep(3)}
                             disabled={formData.services.length === 0}
+                            onMouseEnter={() => handleHover("Continue to voice assistance settings")}
                         >
                             Continue
                         </Button>
@@ -194,6 +208,7 @@ const Onboarding = () => {
                                 }));
                                 handleComplete();
                             }}
+                            onMouseEnter={() => handleHover("Enable voice assistance")}
                         >
                             <Volume2 className="w-5 h-5" />
                             Yes, enable voice assistance
@@ -210,6 +225,7 @@ const Onboarding = () => {
                             }}
                             disabled={formData.specialNeed ===
                                 "Visually Impaired"}
+                            onMouseEnter={() => handleHover("Disable voice assistance")}
                         >
                             <VolumeX className="w-5 h-5" />
                             No, I'll use without voice assistance
