@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import generate_mcq_view
 
 urlpatterns = [
-    path('generate-mcq/', views.generate_mcq_view, name='generate_mcq'),
+    path('generate-mcq/', generate_mcq_view, name='generate_mcq'),
 ]
