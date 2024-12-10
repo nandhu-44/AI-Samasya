@@ -31,7 +31,7 @@ SERVICE_ACCOUNT_FILE = "/Users/nabeelnazeer/Desktop/ai-samasya/AI-Samasya/creden
 SECRET_KEY = 'django-insecure-x$(xho&_+!y$=ui$16^#so60j9r8nf(+(e5)2a+fet8ympo&8^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'mcq_generator',
 ]
 
 MIDDLEWARE = [

@@ -6,13 +6,10 @@ import json
 @csrf_exempt
 def generate_mcq_view(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        chapter_name = data.get('chapter_name')
-        
+        chapter_name = request.POST.get('chapter_name')
         if not chapter_name:
             return JsonResponse({'error': 'Chapter name is required'}, status=400)
         
-        api_key = 'AIzaSyD5jvGlcPH8II0FNrB7mTQWxfxVw-H9aV4'  # Replace with your API key
         generator = MCQGenerator()
         
         try:
