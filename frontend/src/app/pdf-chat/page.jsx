@@ -12,30 +12,91 @@ export default function PDFChat() {
     const [pdfFile, setPdfFile] = useState(null);
     const fileInputRef = useRef(null);
 
+    // const handleFileUpload = async (e) => {
+    //     const file = e.target.files[0];
+    //     if (file && file.type === "application/pdf") {
+    //         setPdfFile(file);
+    //         const formData = new FormData();
+    //         formData.append("file", file); // Changed from "pdf" to "file" to match API
+
+    //         try {
+    //             const token = JSON.parse(localStorage.getItem("token"))?.access;
+    //             if (!token) {
+    //                 throw new Error("No authentication token found");
+    //             }
+
+    //             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/upload-document/`, {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Authorization": `Bearer ${token}`,
+    //                     "Content-Type": "multipart/form-data",
+    //                 },
+    //                 body: {
+    //                     file: formData
+    //                 },
+    //             });
+
+    //             if (response.ok) {
+    //                 const data = await response.json();
+    //                 setMessages((prev) => [...prev, {
+    //                     type: "system",
+    //                     content: data.message || "PDF uploaded successfully!",
+    //                 }]);
+    //             } else {
+    //                 const errorData = await response.json();
+    //                 throw new Error(errorData.message || "Upload failed");
+    //             }
+    //         } catch (error) {
+    //             console.error("Error uploading PDF:", error);
+    //             setMessages((prev) => [...prev, {
+    //                 type: "system",
+    //                 content: error.message || "Error uploading PDF. Please try again.",
+    //             }]);
+    //         }
+    //     }
+    // };
+
     const handleFileUpload = async (e) => {
         const file = e.target.files[0];
         if (file && file.type === "application/pdf") {
             setPdfFile(file);
             const formData = new FormData();
-            formData.append("pdf", file);
-
+            formData.append("file", file); // Correct form field name
+    
             try {
-                const response = await fetch("/api/upload-pdf", {
+                const token = JSON.parse(localStorage.getItem("token"))?.access;
+                if (!token) {
+                    throw new Error("No authentication token found");
+                }
+    
+                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/upload-document/`, {
                     method: "POST",
-                    body: formData,
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: formData,  // Pass formData directly here
                 });
+    
                 if (response.ok) {
+                    const data = await response.json();
                     setMessages((prev) => [...prev, {
                         type: "system",
-                        content:
-                            "PDF uploaded successfully! You can now ask questions about it.",
+                        content: data.message || "PDF uploaded successfully!",
                     }]);
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || "Upload failed");
                 }
             } catch (error) {
                 console.error("Error uploading PDF:", error);
+                setMessages((prev) => [...prev, {
+                    type: "system",
+                    content: error.message || "Error uploading PDF. Please try again.",
+                }]);
             }
         }
     };
+    
 
     const handleDeletePDF = () => {
         setPdfFile(null);
@@ -49,26 +110,45 @@ export default function PDFChat() {
     };
 
     const handleSendMessage = async () => {
-        if (!inputMessage.trim()) return;
+        if (!inputMessage.trim() || !pdfFile) return;
 
-        setMessages(
-            (prev) => [...prev, { type: "user", content: inputMessage }],
-        );
+        setMessages((prev) => [...prev, { type: "user", content: inputMessage }]);
         setInputMessage("");
 
         try {
-            const response = await fetch("/api/chat", {
+            const token = JSON.parse(localStorage.getItem("token"))?.access;
+            if (!token) {
+                throw new Error("No authentication token found");
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/rag_query/`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: inputMessage }),
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ 
+                    query: inputMessage,
+                    filename: pdfFile.name // Add filename if needed by backend
+                }),
             });
 
-            const data = await response.json();
-            setMessages(
-                (prev) => [...prev, { type: "assistant", content: data.reply }],
-            );
+            if (response.ok) {
+                const data = await response.json();
+                setMessages((prev) => [...prev, { 
+                    type: "assistant", 
+                    content: data.answer || data.response || "No response received." 
+                }]);
+            } else {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Query failed");
+            }
         } catch (error) {
             console.error("Error sending message:", error);
+            setMessages((prev) => [...prev, { 
+                type: "assistant", 
+                content: error.message || "Sorry, there was an error processing your request." 
+            }]);
         }
     };
 
