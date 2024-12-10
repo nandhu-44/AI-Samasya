@@ -1,0 +1,42 @@
+[
+  {
+    "question_number": 1,
+    "correct_answer_option": "boolean"
+  },
+  {
+    "question_number": 2,
+    "correct_answer_option": "2"
+  },
+  {
+    "question_number": 3,
+    "correct_answer_option": "To define a function"
+  },
+  {
+    "question_number": 4,
+    "correct_answer_option": "try"
+  },
+  {
+    "question_number": 5,
+    "correct_answer_option": "[3, 4, 5]"
+  },
+  {
+    "question_number": 6,
+    "correct_answer_option": "Adds an element to the end of the list"
+  },
+  {
+    "question_number": 7,
+    "correct_answer_option": "{}"
+  },
+  {
+    "question_number": 8,
+    "correct_answer_option": "2"
+  },
+  {
+    "question_number": 9,
+    "correct_answer_option": "import math"
+  },
+  {
+    "question_number": 10,
+    "correct_answer_option": "A collection of related functions and classes"
+  }
+]

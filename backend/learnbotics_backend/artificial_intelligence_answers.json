@@ -1,0 +1,42 @@
+[
+  {
+    "question_number": 1,
+    "correct_answer_option": "Quantum Physics"
+  },
+  {
+    "question_number": 2,
+    "correct_answer_option": "Supervised Learning"
+  },
+  {
+    "question_number": 3,
+    "correct_answer_option": "Ability to think like a human"
+  },
+  {
+    "question_number": 4,
+    "correct_answer_option": "Neural Networks"
+  },
+  {
+    "question_number": 5,
+    "correct_answer_option": "Natural Language Processing"
+  },
+  {
+    "question_number": 6,
+    "correct_answer_option": "Lack of ethical considerations"
+  },
+  {
+    "question_number": 7,
+    "correct_answer_option": "Trial and error through interaction with an environment"
+  },
+  {
+    "question_number": 8,
+    "correct_answer_option": "Computer Vision"
+  },
+  {
+    "question_number": 9,
+    "correct_answer_option": "Convolutional Neural Network (CNN)"
+  },
+  {
+    "question_number": 10,
+    "correct_answer_option": "Machine Learning"
+  }
+]
