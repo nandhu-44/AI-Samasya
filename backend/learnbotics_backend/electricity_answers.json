@@ -1,0 +1,42 @@
+[
+  {
+    "question_number": 1,
+    "correct_answer_option": "Coulomb"
+  },
+  {
+    "question_number": 2,
+    "correct_answer_option": "Copper"
+  },
+  {
+    "question_number": 3,
+    "correct_answer_option": "Voltage, Current, and Resistance"
+  },
+  {
+    "question_number": 4,
+    "correct_answer_option": "Series circuit"
+  },
+  {
+    "question_number": 5,
+    "correct_answer_option": "Voltage"
+  },
+  {
+    "question_number": 6,
+    "correct_answer_option": "Ammeter"
+  },
+  {
+    "question_number": 7,
+    "correct_answer_option": "Watt"
+  },
+  {
+    "question_number": 8,
+    "correct_answer_option": "Bulb/Lamp"
+  },
+  {
+    "question_number": 9,
+    "correct_answer_option": "Parallel circuit"
+  },
+  {
+    "question_number": 10,
+    "correct_answer_option": "It is doubled"
+  }
+]
