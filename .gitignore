@@ -12,3 +12,5 @@ credentials/
 .DS_Store
 
 artificial_intelligence_basics_answers.json
+
+db.sqlite3

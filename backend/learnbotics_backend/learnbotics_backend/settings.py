@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import timedelta
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,6 +32,8 @@ SECRET_KEY = 'django-insecure-x$(xho&_+!y$=ui$16^#so60j9r8nf(+(e5)2a+fet8ympo&8^
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ALLOWED_HOSTS = [
     "http://localhost:3000",
@@ -49,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'braille_translate',
     'rag_app',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
 ]
 
@@ -80,6 +86,20 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
 
 WSGI_APPLICATION = 'learnbotics_backend.wsgi.application'
 
