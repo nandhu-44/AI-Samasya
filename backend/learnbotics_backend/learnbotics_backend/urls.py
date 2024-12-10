@@ -32,4 +32,5 @@ urlpatterns = [
     path('api/', include('rag_app.urls')),
     path('', include('braille_translate.urls')),  # Include the app's URLs
     path('mcq/', include('mcq_generator.urls')),
+    path('sgn/', include('hand_signs.urls')),  # Include the app's URLs
 ]
