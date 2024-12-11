@@ -31,7 +31,7 @@ SERVICE_ACCOUNT_FILE = "/Users/nabeelnazeer/Desktop/ai-samasya/AI-Samasya/creden
 SECRET_KEY = 'django-insecure-x$(xho&_+!y$=ui$16^#so60j9r8nf(+(e5)2a+fet8ympo&8^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -120,10 +120,9 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'http://127.0.0.1:8000/mcq/generate-mcq/.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
-
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),

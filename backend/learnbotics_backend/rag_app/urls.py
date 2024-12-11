@@ -25,5 +25,8 @@ urlpatterns = [
     
     # Profile endpoint
     path('profile/', UserProfileView.as_view(), name='profile'),
-    
+
+
 ]
+    
+

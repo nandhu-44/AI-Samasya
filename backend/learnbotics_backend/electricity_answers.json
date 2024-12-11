@@ -1,42 +1,112 @@
 [
   {
     "question_number": 1,
-    "correct_answer_option": "Coulomb"
+    "question": "What is the SI unit of electric current?",
+    "options": [
+      "Ampere",
+      "Volt",
+      "Ohm",
+      "Watt"
+    ],
+    "correct_answer_option": "Ampere"
   },
   {
     "question_number": 2,
+    "question": "Which of the following is a good conductor of electricity?",
+    "options": [
+      "Rubber",
+      "Wood",
+      "Copper",
+      "Plastic"
+    ],
     "correct_answer_option": "Copper"
   },
   {
     "question_number": 3,
-    "correct_answer_option": "Voltage, Current, and Resistance"
+    "question": "Ohm's Law states the relationship between which three quantities?",
+    "options": [
+      "Current, Voltage, Resistance",
+      "Power, Voltage, Current",
+      "Resistance, Power, Current",
+      "Voltage, Power, Resistance"
+    ],
+    "correct_answer_option": "Current, Voltage, Resistance"
   },
   {
     "question_number": 4,
+    "question": "A circuit with only one path for the current to flow is called a:",
+    "options": [
+      "Parallel circuit",
+      "Series circuit",
+      "Open circuit",
+      "Closed circuit"
+    ],
     "correct_answer_option": "Series circuit"
   },
   {
     "question_number": 5,
-    "correct_answer_option": "Voltage"
-  },
-  {
-    "question_number": 6,
+    "question": "What device is used to measure electric current?",
+    "options": [
+      "Voltmeter",
+      "Ammeter",
+      "Ohmmeter",
+      "Wattmeter"
+    ],
     "correct_answer_option": "Ammeter"
   },
   {
+    "question_number": 6,
+    "question": "What is the definition of electric potential difference?",
+    "options": [
+      "The amount of charge flowing per unit time",
+      "The work done per unit charge",
+      "The resistance to the flow of charge",
+      "The rate of energy transfer"
+    ],
+    "correct_answer_option": "The work done per unit charge"
+  },
+  {
     "question_number": 7,
-    "correct_answer_option": "Watt"
-  },
-  {
-    "question_number": 8,
-    "correct_answer_option": "Bulb/Lamp"
-  },
-  {
-    "question_number": 9,
+    "question": "Which type of circuit allows the current to take multiple paths?",
+    "options": [
+      "Series circuit",
+      "Parallel circuit",
+      "Open circuit",
+      "Short circuit"
+    ],
     "correct_answer_option": "Parallel circuit"
   },
   {
+    "question_number": 8,
+    "question": "What is the unit of electrical resistance?",
+    "options": [
+      "Ampere",
+      "Volt",
+      "Ohm",
+      "Watt"
+    ],
+    "correct_answer_option": "Ohm"
+  },
+  {
+    "question_number": 9,
+    "question": "A device that converts electrical energy into mechanical energy is called a:",
+    "options": [
+      "Battery",
+      "Resistor",
+      "Motor",
+      "Generator"
+    ],
+    "correct_answer_option": "Motor"
+  },
+  {
     "question_number": 10,
-    "correct_answer_option": "It is doubled"
+    "question": "What is the SI unit of electric power?",
+    "options": [
+      "Ampere",
+      "Volt",
+      "Ohm",
+      "Watt"
+    ],
+    "correct_answer_option": "Watt"
   }
 ]

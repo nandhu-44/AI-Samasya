@@ -21,14 +21,17 @@ const calculateDistance = (point1, point2) => {
 const LearningInterface = ({ sign, onBack }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const thumbnailRef = useRef(null);
   const [accuracy, setAccuracy] = useState(0);
   const [handposeModel, setHandposeModel] = useState(null);
+  const [referencePose, setReferencePose] = useState(null);
 
   useEffect(() => {
     const initializeHandpose = async () => {
       const model = await handpose.load();
       setHandposeModel(model);
       startWebcam();
+      extractReferencePose(model);
     };
 
     const startWebcam = async () => {
@@ -43,8 +46,22 @@ const LearningInterface = ({ sign, onBack }) => {
       }
     };
 
+    const extractReferencePose = async (model) => {
+      if (!thumbnailRef.current) return;
+      try {
+        const predictions = await model.estimateHands(thumbnailRef.current);
+        const landmarks = getHandLandmarks(predictions);
+        if (landmarks) {
+          setReferencePose(landmarks);
+          console.log("Reference pose extracted:", landmarks);
+        }
+      } catch (error) {
+        console.error("Error extracting reference pose:", error);
+      }
+    };
+
     const detectHands = async () => {
-      if (!videoRef.current || !canvasRef.current || !handposeModel) return;
+      if (!videoRef.current || !canvasRef.current || !handposeModel || !referencePose) return;
 
       const video = videoRef.current;
       const canvas = canvasRef.current;
@@ -63,8 +80,9 @@ const LearningInterface = ({ sign, onBack }) => {
             const predictions = await handposeModel.estimateHands(canvas);
             const landmarks = getHandLandmarks(predictions);
             if (landmarks) {
-              const accuracy = calculateAccuracy(landmarks, sign.name);
+              const accuracy = compareHandPoses(landmarks, referencePose);
               setAccuracy(accuracy);
+              drawHandLandmarks(context, landmarks);
             }
           } catch (error) {
             console.error("Hand detection error:", error);
@@ -84,51 +102,29 @@ const LearningInterface = ({ sign, onBack }) => {
     };
   }, [sign.name]);
 
-  const calculateAccuracy = (landmarks, gestureName) => {
-    // Define expected landmark positions for each gesture
-    const gestureTemplates = {
-      'Hello': {
-        // Example positions for "Hello" gesture
-        expectedPositions: [
-          [0, 0, 0],  // thumb base
-          [50, 0, 0], // index finger tip
-          [50, 0, 0], // middle finger tip
-          [50, 0, 0], // ring finger tip
-          [50, 0, 0]  // pinky tip
-        ],
-        tolerance: 20 // distance threshold in pixels
-      },
-      'Thank You': {
-        // Different positions for "Thank You" gesture
-        expectedPositions: [
-          [0, 0, 0],
-          [30, 0, 0],
-          [30, 0, 0],
-          [30, 0, 0],
-          [30, 0, 0]
-        ],
-        tolerance: 20
-      }
-    };
+  const compareHandPoses = (currentPose, referencePose) => {
+    const keyPoints = [0, 4, 8, 12, 16]; // Important landmarks
+    let totalSimilarity = 0;
 
-    const template = gestureTemplates[gestureName];
-    if (!template) return 0;
-
-    // Compare key landmark positions
-    const keyPoints = [0, 4, 8, 12, 16]; // Thumb base, and all fingertips
-    let totalDistance = 0;
-    let maxDistance = template.tolerance * keyPoints.length;
-
-    keyPoints.forEach((point, i) => {
-      const userPosition = landmarks[point];
-      const expectedPosition = template.expectedPositions[i];
-      const distance = calculateDistance(userPosition, expectedPosition);
-      totalDistance += Math.min(distance, template.tolerance);
+    keyPoints.forEach((point) => {
+      const currentPoint = currentPose[point];
+      const referencePoint = referencePose[point];
+      const distance = calculateDistance(currentPoint, referencePoint);
+      // Normalize distance to 0-1 range (closer to 1 means more similar)
+      const similarity = Math.max(0, 1 - (distance / 100));
+      totalSimilarity += similarity;
     });
 
-    // Convert to percentage (100% - error%)
-    const accuracy = Math.max(0, Math.round((1 - totalDistance / maxDistance) * 100));
-    return accuracy;
+    return Math.round((totalSimilarity / keyPoints.length) * 100);
+  };
+
+  const drawHandLandmarks = (context, landmarks) => {
+    landmarks.forEach(point => {
+      context.beginPath();
+      context.arc(point[0], point[1], 3, 0, 2 * Math.PI);
+      context.fillStyle = 'red';
+      context.fill();
+    });
   };
 
   return (
@@ -139,6 +135,12 @@ const LearningInterface = ({ sign, onBack }) => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
+          <img
+            ref={thumbnailRef}
+            src={sign.thumbnail}
+            alt={sign.name}
+            className="w-full rounded-lg mb-4"
+          />
           <video 
             autoPlay 
             loop 

@@ -36,3 +36,6 @@ class PDFProcessor:
         index = faiss.IndexFlatL2(dimension)
         index.add(embeddings)
         return index
+    
+
+    
