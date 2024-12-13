@@ -12,50 +12,6 @@ export default function PDFChat() {
     const [pdfFile, setPdfFile] = useState(null);
     const fileInputRef = useRef(null);
 
-    // const handleFileUpload = async (e) => {
-    //     const file = e.target.files[0];
-    //     if (file && file.type === "application/pdf") {
-    //         setPdfFile(file);
-    //         const formData = new FormData();
-    //         formData.append("file", file); // Changed from "pdf" to "file" to match API
-
-    //         try {
-    //             const token = JSON.parse(localStorage.getItem("token"))?.access;
-    //             if (!token) {
-    //                 throw new Error("No authentication token found");
-    //             }
-
-    //             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/upload-document/`, {
-    //                 method: "POST",
-    //                 headers: {
-    //                     "Authorization": `Bearer ${token}`,
-    //                     "Content-Type": "multipart/form-data",
-    //                 },
-    //                 body: {
-    //                     file: formData
-    //                 },
-    //             });
-
-    //             if (response.ok) {
-    //                 const data = await response.json();
-    //                 setMessages((prev) => [...prev, {
-    //                     type: "system",
-    //                     content: data.message || "PDF uploaded successfully!",
-    //                 }]);
-    //             } else {
-    //                 const errorData = await response.json();
-    //                 throw new Error(errorData.message || "Upload failed");
-    //             }
-    //         } catch (error) {
-    //             console.error("Error uploading PDF:", error);
-    //             setMessages((prev) => [...prev, {
-    //                 type: "system",
-    //                 content: error.message || "Error uploading PDF. Please try again.",
-    //             }]);
-    //         }
-    //     }
-    // };
-
     const handleFileUpload = async (e) => {
         const file = e.target.files[0];
         if (file && file.type === "application/pdf") {
@@ -83,6 +39,8 @@ export default function PDFChat() {
                         type: "system",
                         content: data.message || "PDF uploaded successfully!",
                     }]);
+                } else if (response.status === 403) {
+                    throw new Error("You do not have permission to upload this PDF.");
                 } else {
                     const errorData = await response.json();
                     throw new Error(errorData.message || "Upload failed");
@@ -139,6 +97,8 @@ export default function PDFChat() {
                     type: "assistant", 
                     content: data.answer || data.response || "No response received." 
                 }]);
+            } else if (response.status === 403) {
+                throw new Error("You do not have permission to send this message.");
             } else {
                 const errorData = await response.json();
                 throw new Error(errorData.message || "Query failed");

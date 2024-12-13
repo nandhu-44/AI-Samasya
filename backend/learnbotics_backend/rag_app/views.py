@@ -296,3 +296,26 @@ class UserProfileView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@csrf_exempt
+def generate_mcq_view(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            chapter_name = data.get('chapter_name')
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+        
+        if not chapter_name:
+            return JsonResponse({'error': 'Chapter name is required'}, status=400)
+        
+        generator = MCQGenerator()
+        
+        try:
+            answer_key = generator.generate_mcq_for_chapter(chapter_name)
+            generator.save_answers(chapter_name, answer_key)
+            return JsonResponse({'message': 'MCQs generated successfully', 'answer_key': answer_key})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=405)

@@ -1,0 +1,112 @@
+[
+  {
+    "question_number": 1,
+    "question": "What is the distance between two consecutive crests or troughs in a wave called?",
+    "options": [
+      "Amplitude",
+      "Wavelength",
+      "Frequency",
+      "Period"
+    ],
+    "correct_answer_option": "Wavelength"
+  },
+  {
+    "question_number": 2,
+    "question": "Which of the following is NOT a characteristic of a transverse wave?",
+    "options": [
+      "Crest",
+      "Trough",
+      "Compression",
+      "Rarefaction"
+    ],
+    "correct_answer_option": "Compression"
+  },
+  {
+    "question_number": 3,
+    "question": "The number of complete waves passing a point per unit time is known as:",
+    "options": [
+      "Amplitude",
+      "Wavelength",
+      "Frequency",
+      "Period"
+    ],
+    "correct_answer_option": "Frequency"
+  },
+  {
+    "question_number": 4,
+    "question": "Sound waves are examples of which type of wave?",
+    "options": [
+      "Transverse waves",
+      "Longitudinal waves",
+      "Electromagnetic waves",
+      "Surface waves"
+    ],
+    "correct_answer_option": "Longitudinal waves"
+  },
+  {
+    "question_number": 5,
+    "question": "The speed of a wave is determined by:",
+    "options": [
+      "Amplitude only",
+      "Frequency only",
+      "Wavelength only",
+      "Wavelength and frequency"
+    ],
+    "correct_answer_option": "Wavelength and frequency"
+  },
+  {
+    "question_number": 6,
+    "question": "What phenomenon occurs when two waves overlap and their amplitudes add together?",
+    "options": [
+      "Diffraction",
+      "Refraction",
+      "Interference",
+      "Reflection"
+    ],
+    "correct_answer_option": "Interference"
+  },
+  {
+    "question_number": 7,
+    "question": "The bending of a wave as it passes from one medium to another is called:",
+    "options": [
+      "Diffraction",
+      "Refraction",
+      "Interference",
+      "Reflection"
+    ],
+    "correct_answer_option": "Refraction"
+  },
+  {
+    "question_number": 8,
+    "question": "The spreading of a wave as it passes through an opening or around an obstacle is called:",
+    "options": [
+      "Diffraction",
+      "Refraction",
+      "Interference",
+      "Reflection"
+    ],
+    "correct_answer_option": "Diffraction"
+  },
+  {
+    "question_number": 9,
+    "question": "The bouncing back of a wave when it hits a surface is called:",
+    "options": [
+      "Diffraction",
+      "Refraction",
+      "Interference",
+      "Reflection"
+    ],
+    "correct_answer_option": "Reflection"
+  },
+  {
+    "question_number": 10,
+    "question": "Which of the following is an example of an electromagnetic wave?",
+    "options": [
+      "Sound wave",
+      "Water wave",
+      "Seismic wave",
+      "Light wave"
+    ],
+    "correct_answer_option": "Light wave"
+  }
+]

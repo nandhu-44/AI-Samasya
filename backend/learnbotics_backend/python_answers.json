@@ -5,38 +5,38 @@
   },
   {
     "question_number": 2,
-    "correct_answer_option": "2"
+    "correct_answer_option": "15"
   },
   {
     "question_number": 3,
-    "correct_answer_option": "To define a function"
+    "correct_answer_option": "To calculate the length of a string or list"
   },
   {
     "question_number": 4,
-    "correct_answer_option": "try"
+    "correct_answer_option": "def"
   },
   {
     "question_number": 5,
-    "correct_answer_option": "[3, 4, 5]"
+    "correct_answer_option": "Adds the element 6 to the end of `my_list`"
   },
   {
     "question_number": 6,
-    "correct_answer_option": "Adds an element to the end of the list"
+    "correct_answer_option": "# ..."
   },
   {
     "question_number": 7,
-    "correct_answer_option": "{}"
+    "correct_answer_option": "for loop"
   },
   {
     "question_number": 8,
-    "correct_answer_option": "2"
+    "correct_answer_option": "1 2 3"
   },
   {
     "question_number": 9,
-    "correct_answer_option": "import math"
+    "correct_answer_option": "using `try...except` blocks"
   },
   {
     "question_number": 10,
-    "correct_answer_option": "A collection of related functions and classes"
+    "correct_answer_option": "Imports modules or packages"
   }
 ]

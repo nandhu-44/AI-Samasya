@@ -26,7 +26,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login/`,
@@ -36,35 +36,45 @@ const LoginPage = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
-        },
+        }
       );
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        // Save token
-        localStorage.setItem("token", JSON.stringify({
+        // Validate token structure
+        if (!data.access || !data.refresh) {
+          throw new Error("Invalid token structure");
+        }
+  
+        // Save token with additional metadata
+        const tokenData = {
+          access: data.access,
           refresh: data.refresh,
-          access: data.access
-        }));
-        
-        // Save user info
-        localStorage.setItem("userInfo", JSON.stringify(data.user));
-
+          expiresAt: Date.now() + (data.expires_in || 3600) * 1000,
+          user: data.user || {}
+        };
+  
+        localStorage.setItem("token", JSON.stringify(tokenData));
+        localStorage.setItem("userInfo", JSON.stringify(data.user || {}));
+  
         toast({
           title: "Success",
           description: "Login successful!",
         });
-        // router.push("/");
+  
         window.location.href = "/";
       } else {
-        throw new Error(data.message || "Login failed");
+        // More specific error handling
+        const errorMessage = data.detail || data.message || "Login failed";
+        throw new Error(errorMessage);
       }
     } catch (error) {
+      console.error("Login error:", error);
       toast({
         variant: "destructive",
-        title: "Error",
-        description: error.message,
+        title: "Login Error",
+        description: error.message || "An unexpected error occurred",
       });
     } finally {
       setLoading(false);

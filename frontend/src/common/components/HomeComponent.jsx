@@ -81,7 +81,7 @@ const HomeComponent = () => {
           </Card>
         </Link>
 
-        <Link href="/mcq">
+        <Link href="/mcq-generator">
           <Card className="p-6 hover:shadow-lg transition-all cursor-pointer"
             onMouseEnter={() => handleHover("MCQ Practice")}>
             <div className="flex flex-col items-center gap-4">
