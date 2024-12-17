@@ -1,6 +1,7 @@
 import os
 import json
 import magic
+from dotenv import load_dotenv
 
 from django.conf import settings
 from django.contrib.auth import logout
@@ -25,9 +26,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rag_app.models import DocumentUpload
 
+# Load environment variables
+load_dotenv('/Users/nabeelnazeer/Desktop/ai-samasya/AI-Samasya/backend/.env')
 
 # Configure your Google AI API Key here
-GOOGLE_AI_API_KEY = 'AIzaSyD5jvGlcPH8II0FNrB7mTQWxfxVw-H9aV4'
+GOOGLE_AI_API_KEY = os.getenv('GOOGLE_AI_API_KEY')
 
 @csrf_exempt
 def rag_query(request):

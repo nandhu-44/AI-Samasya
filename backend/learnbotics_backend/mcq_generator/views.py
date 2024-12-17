@@ -1,13 +1,15 @@
 import json
 import re
+import os
+from dotenv import load_dotenv
 import google.generativeai as genai
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 class MCQGenerator:
     def __init__(self):
-        # Note: In production, use environment variables for API keys
-        genai.configure(api_key="AIzaSyD5jvGlcPH8II0FNrB7mTQWxfxVw-H9aV4")
+        load_dotenv()
+        genai.configure(api_key=os.getenv('GOOGLE_AI_API_KEY'))
         self.model = genai.GenerativeModel("gemini-1.5-flash")
     
     def generate_mcq_for_chapter(self, chapter_name):
