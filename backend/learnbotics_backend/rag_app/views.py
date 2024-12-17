@@ -17,7 +17,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+import google.generativeai as genai
 from .models import DocumentUpload
 from .rag import RAGSystem
 from .serializers import UserRegistrationSerializer, UserProfileSerializer
@@ -27,11 +27,14 @@ from rest_framework.permissions import IsAuthenticated
 from rag_app.models import DocumentUpload
 
 # Load environment variables
-load_dotenv('/Users/nabeelnazeer/Desktop/ai-samasya/AI-Samasya/backend/.env')
+load_dotenv()
 
 # Configure your Google AI API Key here
 GOOGLE_AI_API_KEY = os.getenv('GOOGLE_AI_API_KEY')
+if not GOOGLE_AI_API_KEY:
+    raise ValueError("GENAI_API_KEY is not set in the .env file")
 
+print(GOOGLE_AI_API_KEY)
 @csrf_exempt
 def rag_query(request):
     """

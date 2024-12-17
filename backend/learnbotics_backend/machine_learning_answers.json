@@ -1,0 +1,112 @@
+[
+  {
+    "question_number": 1,
+    "question": "Which of the following is NOT a type of machine learning?",
+    "options": [
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Reinforcement Learning",
+      "Procedural Learning"
+    ],
+    "correct_answer_option": "Procedural Learning"
+  },
+  {
+    "question_number": 2,
+    "question": "In supervised learning, the algorithm learns from:",
+    "options": [
+      "Unlabeled data",
+      "Reinforcement signals",
+      "Labeled data",
+      "Random data"
+    ],
+    "correct_answer_option": "Labeled data"
+  },
+  {
+    "question_number": 3,
+    "question": "K-means clustering is an example of:",
+    "options": [
+      "Supervised learning",
+      "Unsupervised learning",
+      "Reinforcement learning",
+      "Semi-supervised learning"
+    ],
+    "correct_answer_option": "Unsupervised learning"
+  },
+  {
+    "question_number": 4,
+    "question": "Which algorithm is best suited for dimensionality reduction?",
+    "options": [
+      "K-Nearest Neighbors",
+      "Linear Regression",
+      "Principal Component Analysis (PCA)",
+      "Decision Tree"
+    ],
+    "correct_answer_option": "Principal Component Analysis (PCA)"
+  },
+  {
+    "question_number": 5,
+    "question": "What is the purpose of a confusion matrix in machine learning?",
+    "options": [
+      "To visualize data distributions",
+      "To measure model accuracy",
+      "To select the best features",
+      "To perform dimensionality reduction"
+    ],
+    "correct_answer_option": "To measure model accuracy"
+  },
+  {
+    "question_number": 6,
+    "question": "What does the term 'bias' refer to in the context of machine learning?",
+    "options": [
+      "The amount of data used for training",
+      "The error due to overly simple assumptions of a model",
+      "The ability of a model to generalize to unseen data",
+      "The complexity of the model"
+    ],
+    "correct_answer_option": "The error due to overly simple assumptions of a model"
+  },
+  {
+    "question_number": 7,
+    "question": "What is 'overfitting' in machine learning?",
+    "options": [
+      "A model that performs poorly on both training and testing data",
+      "A model that performs well on training data but poorly on testing data",
+      "A model that performs well on both training and testing data",
+      "A model that is too simple to capture the underlying patterns"
+    ],
+    "correct_answer_option": "A model that performs well on training data but poorly on testing data"
+  },
+  {
+    "question_number": 8,
+    "question": "Which technique helps prevent overfitting?",
+    "options": [
+      "Increasing model complexity",
+      "Using more training data",
+      "Reducing regularization",
+      "Using only a small dataset"
+    ],
+    "correct_answer_option": "Using more training data"
+  },
+  {
+    "question_number": 9,
+    "question": "In reinforcement learning, an agent learns by:",
+    "options": [
+      "Following pre-defined rules",
+      "Analyzing labeled data",
+      "Interacting with an environment and receiving rewards or penalties",
+      "Clustering similar data points"
+    ],
+    "correct_answer_option": "Interacting with an environment and receiving rewards or penalties"
+  },
+  {
+    "question_number": 10,
+    "question": "Which of the following is a common evaluation metric for classification problems?",
+    "options": [
+      "Mean Squared Error (MSE)",
+      "Root Mean Squared Error (RMSE)",
+      "Accuracy",
+      "R-squared"
+    ],
+    "correct_answer_option": "Accuracy"
+  }
+]
