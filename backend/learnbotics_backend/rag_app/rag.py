@@ -74,7 +74,7 @@ class RAGSystem:
         """
         
         try:
-            response = self.model.generate_content(augmented_prompt)
-            return response.text
+            for chunk in self.model.generate_content_stream(augmented_prompt):
+                yield chunk.text  # Assuming each chunk has a `text` property
         except Exception as e:
-            return f"Error generating response: {str(e)}"
+            yield f"Error generating response: {str(e)}"
