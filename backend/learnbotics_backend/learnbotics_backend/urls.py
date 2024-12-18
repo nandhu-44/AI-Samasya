@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from rag_app import routing
 
 urlpatterns = [
 
@@ -24,5 +25,6 @@ urlpatterns = [
     path("api/", include("rag_app.urls")),
     path("brl/", include("braille_translate.urls")),  # Include the app's URLs
     path("mcq/", include("mcq_generator.urls")),
+    # path('ws/', include(routing.websocket_urlpatterns)),
 
 ]

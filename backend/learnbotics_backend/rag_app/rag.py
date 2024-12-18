@@ -1,6 +1,7 @@
 import google.generativeai as genai
 import numpy as np
 from typing import List, Optional
+import asyncio
 
 from .utils import PDFProcessor
 
@@ -78,3 +79,42 @@ class RAGSystem:
             return response.text
         except Exception as e:
             return f"Error generating response: {str(e)}"
+    
+    async def generate_response_stream(self, query: str, context: Optional[List[str]] = None):
+        """
+        Generate response using Gemini with optional context in a streaming manner
+        
+        Args:
+            query (str): User's query
+            context (List[str], optional): Retrieved context sentences
+        
+        Yields:
+            Chunks of generated response from Gemini
+        """
+        # If no context provided, retrieve it
+        if context is None:
+            context = self.retrieve_context(query)
+        
+        # Combine context and query
+        augmented_prompt = f"""
+        Context: {' '.join(context)}
+        
+        Query: {query}
+        
+        Based on the context, provide a comprehensive and precise answer to the query.
+        """
+        
+        try:
+            # Use the Gemini API's streaming capability
+            response_generator = self.model.generate_text(
+                augmented_prompt,
+                max_tokens=1000,
+                temperature=0.7,
+                top_p=0.9,
+                stream=True  # Enable streaming if supported
+            )
+            for response in response_generator:
+                await asyncio.sleep(0)  # Yield control to the event loop
+                yield response.text  # Adjust based on actual response structure
+        except Exception as e:
+            yield f"Error generating response: {str(e)}"

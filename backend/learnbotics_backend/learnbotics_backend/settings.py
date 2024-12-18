@@ -87,7 +87,18 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'mcq_generator',
+    'channels',
 ]
+
+# Add ASGI application
+ASGI_APPLICATION = 'learnbotics_backend.asgi.application'
+
+# Add Channel Layers configuration
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Must be at the top

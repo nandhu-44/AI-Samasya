@@ -35,47 +35,53 @@ if not GOOGLE_AI_API_KEY:
     raise ValueError("GENAI_API_KEY is not set in the .env file")
 
 print(GOOGLE_AI_API_KEY)
-@csrf_exempt
-def rag_query(request):
-    """
-    Handle RAG query requests
-    """
-    if request.method == "POST":
-        try:
-            # Parse the incoming JSON request
-            data = json.loads(request.body)
-            query = data.get("query")
+# @csrf_exempt
+# def rag_query(request):
+#     """
+#     Handle RAG query requests
+#     """
+#     if request.method == "POST":
+#         try:
+#             data = json.loads(request.body)
+#             query = data.get("query")
+#             use_websocket = data.get("use_websocket", False)
             
-            if not query:
-                return JsonResponse({"error": "Query is missing"}, status=400)
+#             if not query:
+#                 return JsonResponse({"error": "Query is missing"}, status=400)
             
-            # Retrieve the most recent processed document
-            latest_document = DocumentUpload.objects.filter(is_processed=True).order_by('-id').first()
+#             if use_websocket:
+#                 return JsonResponse({
+#                     "message": "Please use WebSocket connection for streaming responses",
+#                     "websocket_url": "ws://" + request.get_host() + "/ws/rag/"
+#                 })
+                
+#             # Retrieve the most recent processed document
+#             latest_document = DocumentUpload.objects.filter(is_processed=True).order_by('-id').first()
             
-            if not latest_document:
-                return JsonResponse({"error": "No processed document found"}, status=404)
+#             if not latest_document:
+#                 return JsonResponse({"error": "No processed document found"}, status=404)
             
-            pdf_path = latest_document.file.path
+#             pdf_path = latest_document.file.path
             
-            # Validate that the PDF file exists
-            if not os.path.exists(pdf_path):
-                return JsonResponse({"error": f"File not found: {pdf_path}"}, status=404)
+#             # Validate that the PDF file exists
+#             if not os.path.exists(pdf_path):
+#                 return JsonResponse({"error": f"File not found: {pdf_path}"}, status=404)
             
-            # Initialize RAG System with the uploaded PDF
-            rag_system = RAGSystem(
-                pdf_path=pdf_path, 
-                api_key=GOOGLE_AI_API_KEY  # Replace with your actual API key variable
-            )
+#             # Initialize RAG System with the uploaded PDF
+#             rag_system = RAGSystem(
+#                 pdf_path=pdf_path, 
+#                 api_key=GOOGLE_AI_API_KEY  # Replace with your actual API key variable
+#             )
             
-            # Generate response to the user's query
-            response = rag_system.generate_response(query)
+#             # Generate response to the user's query
+#             response = rag_system.generate_response(query)
             
-            return JsonResponse({"response": response})
+#             return JsonResponse({"response": response})
         
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
+#         except Exception as e:
+#             return JsonResponse({"error": str(e)}, status=500)
     
-    return JsonResponse({"error": "Invalid request method"}, status=405)
+#     return JsonResponse({"error": "Invalid request method"}, status=405)
 
 
 
